@@ -5,7 +5,7 @@ namespace Workout_Tracker.Models
     public class Workout
     {
         [Required]
-        public Days Day { get; set; }
+        public DateOnly Date { get; set; }
 
         [Required]
         public required string Type { get; set; }
@@ -13,5 +13,7 @@ namespace Workout_Tracker.Models
         [Required]
         [Range(1, 300, ErrorMessage = "Please enter a valid duration in minutes.")]
         public required string Duration { get; set; }
+
+        public int Id { get; set; }
     }
 }

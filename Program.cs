@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Workout_Tracker.Models;
+
 namespace Workout_Tracker
 {
     public class Program
@@ -8,6 +11,9 @@ namespace Workout_Tracker
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<WorkoutsDbContext>(options =>
+                options.UseInMemoryDatabase("WorkoutsDb")
+            );
 
             var app = builder.Build();
 

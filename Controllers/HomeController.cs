@@ -4,14 +4,9 @@ using Workout_Tracker.Models;
 
 namespace Workout_Tracker.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController(ILogger<HomeController> logger, WorkoutsDbContext context) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        private readonly ILogger<HomeController> _logger = logger;
 
         public IActionResult Index()
         {
@@ -28,14 +23,17 @@ namespace Workout_Tracker.Controllers
             return View();
         }
 
-        public IActionResult WorkoutForm()
+        public IActionResult WorkoutForm(Workout model)
         {
+            context.Workouts.Add(model);
+            context.SaveChanges();
             return RedirectToAction("Workouts");
         }
 
         public IActionResult Workouts()
         {
-            return View();
+            var allWorkouts = context.Workouts.ToList(); 
+            return View(allWorkouts);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

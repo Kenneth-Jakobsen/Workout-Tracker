@@ -2,6 +2,36 @@
 	ViewData["Title"] = "My Workouts";
 }
 
+@model List<Workout>
+
 <div class="text-center">
 	<h1 class="display-4">My Workouts</h1>
+	<br/>
+	<table class="table">
+		<thead>
+		<tr>
+			<th>
+				Date
+			</th>
+			<th>
+				Type
+			</th>
+			<th>
+				Duration (min)
+			</th>
+		</tr>
+		</thead>
+		<tbody>
+		@{
+			foreach (var workout in Model)
+			{
+				<tr>
+					<td>@workout.Date</td>
+					<td>@workout.Type</td>
+					<td>@workout.Duration</td>
+				</tr>
+			}
+		}
+		</tbody>
+	</table>
 </div>

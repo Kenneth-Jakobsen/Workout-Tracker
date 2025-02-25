@@ -8,7 +8,7 @@
 	<div class="card p-4" style="max-width: 500px; width: 100%;">
 		<h2 class="text-center mb-4">Add Today's Workout</h2>
 
-		<form asp-action="WorkoutForm" method="post">
+		<form asp-action="WorkoutForm" asp-controller="Home"  method="post">
 			<div class="mb-3">
 				<label asp-for="Type" class="form-label">Type:</label>
 				<select asp-for="Type" class="form-select">
@@ -23,8 +23,8 @@
 			</div>
 
 			<div class="mb-3">
-				<label asp-for="Day" class="form-label">Date:</label>
-				<input asp-for="Day" class="form-control" type="date" />
+				<label asp-for="Date" class="form-label">Date:</label>
+				<input asp-for="Date" class="form-control" type="date" />
 			</div>
 
 			<div class="text-center">
