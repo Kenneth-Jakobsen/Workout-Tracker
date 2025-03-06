@@ -10,6 +10,11 @@ namespace Workout_Tracker.Controllers
 
         public IActionResult Index()
         {
+
+            var currentMonth = DateTime.Now.Month;
+            var currentYear = DateTime.Now.Year;
+            int workoutCount = context.Workouts.Where(w => w.Date.Month == currentMonth && w.Date.Year == currentYear).Count();
+            ViewBag.WorkoutCount = workoutCount;
             return View();
         }
 

@@ -2,8 +2,13 @@
 
 namespace Workout_Tracker.Models
 {
-    public class WorkoutsDbContext(DbContextOptions<WorkoutsDbContext> options) : DbContext(options)
+    public class WorkoutsDbContext:DbContext
     {
         public DbSet<Workout> Workouts { get; set; }
+
+        public WorkoutsDbContext(DbContextOptions<WorkoutsDbContext> options) : base(options)
+        {
+
+        }
     }
 }
