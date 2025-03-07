@@ -12,7 +12,6 @@
 			<th>Date</th>
 			<th>Type</th>
 			<th>Duration (min)</th>
-			<th>Actions</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -22,9 +21,6 @@
 				<td>@workout.Date.ToString("dd MMM yyyy")</td>
 				<td>@workout.Type</td>
 				<td>@workout.Duration</td>
-				<td>
-					<a asp-action="Delete" asp-route-id="@workout.Id" class="btn btn-sm btn-danger">Delete</a>
-				</td>
 			</tr>
 		}
 		</tbody>

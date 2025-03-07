@@ -12,7 +12,7 @@ namespace Workout_Tracker.Models
 
         [Required]
         [Range(1, 300, ErrorMessage = "Please enter a valid duration in minutes.")]
-        public required string Duration { get; set; }
+        public required int Duration { get; set; }
 
         public int Id { get; set; }
     }

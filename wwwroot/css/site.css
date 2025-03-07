@@ -27,3 +27,37 @@ body {
     border: 1px solid;
     justify-content: space-between;
 }
+
+.heatmap {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.heatmap-cell {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .heatmap-cell:hover {
+        opacity: 0.8;
+    }
+
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.ml-2 {
+    margin-left: 0.5rem;
+}

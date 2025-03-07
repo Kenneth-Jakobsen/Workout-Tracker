@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Workout_Tracker.Models;
 
 namespace Workout_Tracker.Controllers
@@ -10,13 +11,19 @@ namespace Workout_Tracker.Controllers
 
         public IActionResult Index()
         {
+            var firstDayOfMonth = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, 1);
+            var workouts = context.Workouts
+                .Where(w => w.Date >= firstDayOfMonth)
+                .ToList();
 
-            var currentMonth = DateTime.Now.Month;
-            var currentYear = DateTime.Now.Year;
-            int workoutCount = context.Workouts.Where(w => w.Date.Month == currentMonth && w.Date.Year == currentYear).Count();
-            ViewBag.WorkoutCount = workoutCount;
+            ViewBag.WorkoutCount = workouts.Count;
+            ViewBag.Workouts = workouts;
+            var maxDuration = workouts.Any() ? workouts.Max(w => w.Duration) : 1;
+            ViewBag.MaxDuration = maxDuration;
+
             return View();
         }
+
 
         public IActionResult Privacy()
         {
