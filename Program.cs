@@ -12,7 +12,7 @@ namespace Workout_Tracker
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<WorkoutsDbContext>(options =>
-                options.UseInMemoryDatabase("WorkoutsDb")
+                options.UseSqlServer("Server=KENS-PC\\SQLEXPRESS;Database=Workouts;Integrated Security=True;TrustServerCertificate=True;")
             );
 
             var app = builder.Build();

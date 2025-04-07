@@ -11,16 +11,19 @@ namespace Workout_Tracker.Controllers
 
         public IActionResult Index()
         {
+            int currentMonth = DateTime.Now.Month;
+            int currentYear = DateTime.Now.Year;
+            int daysInCurrentMonth = DateTime.DaysInMonth(currentYear, currentMonth);
             var firstDayOfMonth = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, 1);
             var workouts = context.Workouts
                 .Where(w => w.Date >= firstDayOfMonth)
                 .ToList();
-
             ViewBag.WorkoutCount = workouts.Count;
             ViewBag.Workouts = workouts;
-            var maxDuration = workouts.Any() ? workouts.Max(w => w.Duration) : 1;
-            ViewBag.MaxDuration = maxDuration;
+            ViewBag.Workoutdays = workouts.Select(w => w.Date.Day).ToList();
+            ViewBag.WorkoutDurations = workouts.Select(w => w.Duration).ToList();
 
+            ViewBag.DaysInCurrentMonth = daysInCurrentMonth;
             return View();
         }
 

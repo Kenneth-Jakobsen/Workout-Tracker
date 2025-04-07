@@ -1,13 +1,28 @@
 ﻿@{
-	ViewData["Title"] = "Home Page";
-
+    ViewData["Title"] = "Home Page";
+    int daysInCurrentMonth = ViewBag.DaysInCurrentMonth;
+    var workoutDates = ViewBag.WorkoutDays;
+    var workouts = ViewBag.Workouts;
+    var durations = ViewBag.Duration;
 }
 
 @Model
 
-<div class="text-center">
-	<h1 class="display-4">Welcome to your workout tracker</h1>
-	<h2>This month you have done @ViewBag.WorkoutCount Workout</h2>
-	<a asp-action="Workouts" class="btn btn-primary">Overview</a>
-	<a asp-action="AddWorkout" class="btn btn-secondary">Add today's workout</a>
+<div class="text-center mt-5">
+    <h1 class="display-4 mb-3">Welcome to your workout tracker</h1>
+    <h2 class="display-6 mb-4">This month you have done <span class="fw-bold text-success">@ViewBag.WorkoutCount</span> Workouts</h2>
+
+    <div class="heatmap mb-4">
+        @for (int i = 1; i <= daysInCurrentMonth; i++)
+        {
+            <div class="heatmap-cell @(workoutDates.Contains(i) ? "workout-day" : "")">
+                @i
+            </div>
+        }
+    </div>
+
+    <div class="d-flex justify-content-center gap-3">
+        <a asp-action="Workouts" class="btn btn-primary">Overview</a>
+        <a asp-action="AddWorkout" class="btn btn-outline-secondary">Add today's workout</a>
+    </div>
 </div>

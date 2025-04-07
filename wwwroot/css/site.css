@@ -30,23 +30,38 @@ body {
 
 .heatmap {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    max-width: 800px;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
+    gap: 8px; /* Reduce the gap between cells */
+    width: 450px; /* Adjust the width to fit small squares */
+    padding: 20px;
+    height: auto; /* Let the height adjust based on content */
     margin: 20px auto;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    border-radius: 4px;
 }
+
 
 .heatmap-cell {
     padding: 10px;
     text-align: center;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #f0f0f0;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-    .heatmap-cell:hover {
+.heatmap-cell.workout-day {
+        background-color: #4CAF50; /* Green color for workout days */
+        color: white;
+ }
+
+.heatmap-cell:hover {
+        background-color: #427E93; /* Change color on hover */
+    }
+
+.heatmap-cell:hover {
         opacity: 0.8;
     }
 
@@ -60,4 +75,8 @@ body {
 
 .ml-2 {
     margin-left: 0.5rem;
+}
+
+footer{
+   margin-top:auto;
 }
