@@ -10,14 +10,17 @@
     <div class="heatmap mb-4">
         @for (int i = 1; i <= Model.DaysInCurrentMonth; i++)
         {
+            var date = new DateTime(DateTime.Now.Year, DateTime.Now.Month, i);
+            var weekDay = date.ToString("ddd");
             <div class="heatmap-cell @(Model.WorkoutDays.Contains(i) ? "workout-day" : "")">
-                @i
+                <div class="weekday">@weekDay</div>
+                <div class="day-number">@i</div>
             </div>
         }
     </div>
 
     <div class="d-flex justify-content-center gap-3">
         <a asp-action="Workouts" class="btn btn-primary">Overview</a>
-        <a asp-action="AddWorkout" class="btn btn-outline-secondary">Add today's workout</a>
+        <a asp-action="AddWorkout" class="btn btn-outline-secondary">Add workout</a>
     </div>
 </div>
