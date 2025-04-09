@@ -13,18 +13,22 @@ namespace Workout_Tracker.Controllers
         {
             int currentMonth = DateTime.Now.Month;
             int currentYear = DateTime.Now.Year;
+            var firstDayOfMonth = new DateOnly(currentYear, currentMonth, 1);
             int daysInCurrentMonth = DateTime.DaysInMonth(currentYear, currentMonth);
-            var firstDayOfMonth = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, 1);
-            var workouts = context.Workouts
-                .Where(w => w.Date >= firstDayOfMonth)
-                .ToList();
-            ViewBag.WorkoutCount = workouts.Count;
-            ViewBag.Workouts = workouts;
-            ViewBag.Workoutdays = workouts.Select(w => w.Date.Day).ToList();
-            ViewBag.WorkoutDurations = workouts.Select(w => w.Duration).ToList();
+            var workouts = context.Workouts.Where(w => w.Date >= firstDayOfMonth).ToList();
 
-            ViewBag.DaysInCurrentMonth = daysInCurrentMonth;
-            return View();
+            var viewModel = new WorkoutOverviewModel
+            {
+                WorkoutCount = workouts.Count,
+                Workouts = workouts,
+                WorkoutDays = workouts.Select(w => w.Date.Day).ToList(),
+                WorkoutDurations = workouts.Select(w => w.Duration).ToList(),
+                DaysInCurrentMonth = daysInCurrentMonth
+
+            };
+
+            return View(viewModel);
+           
         }
 
 
@@ -40,9 +44,15 @@ namespace Workout_Tracker.Controllers
 
         public IActionResult WorkoutForm(Workout model)
         {
-            context.Workouts.Add(model);
-            context.SaveChanges();
+            if (ModelState.IsValid) 
+            {
+                context.Workouts.Add(model);
+                context.SaveChanges();
+                return RedirectToAction("Workouts");
+            }
+
             return RedirectToAction("Workouts");
+        
         }
 
         public IActionResult Workouts()
@@ -51,6 +61,13 @@ namespace Workout_Tracker.Controllers
             return View(allWorkouts);
         }
 
+        public IActionResult Delete(int id)
+        {
+            var workout = context.Workouts.FirstOrDefault(w => w.Id == id);
+            context.Workouts.Remove(workout);
+            context.SaveChanges();
+            return RedirectToAction("Workouts");
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
